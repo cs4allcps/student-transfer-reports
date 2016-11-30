@@ -68,11 +68,20 @@ def mkdir_p(path):
             raise
 
 def write_reports(schools, report_type, names):
-
+	'''
+	Writes a csv report for each school with
+		(1) For current schools: a list of all freshmans' previous schools with counts
+		(2) For previous schools: a list of schools students matriculated to wiht counts
+	'''
 	mkdir_p('reports/' + report_type + '/csv_reports')
 	for index in schools:
 		school = schools[index]
 		name = names[index]
+		'''
+		If using these reports for data alnalysis in conjunction with other datasets,
+		it is important to note that any slash in the school name has been replaced with
+		a bar in the report file names, as follows:
+		'''
 		name = name.replace("/", " | ") #so as not to be confused with a filepath
 		with open('reports/' + report_type + '/csv_reports/' + name + '.csv', 'w') as f:
 			w = csv.writer(f)
