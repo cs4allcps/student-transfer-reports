@@ -81,8 +81,8 @@ def make_txt_from_csv(csv_file, txt_file):
 	if not my_input_file.closed:
 		text_list = [];
 		for line in my_input_file.readlines():
-			line = line.split(",", 2)
-			text_list.append(" ".join(line))
+			line = line.strip().split(",", 2)
+			text_list.append("\t".join([line[2], line[0], line[1]]) + "\n")
 		my_input_file.close()
 
 	try:
