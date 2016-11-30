@@ -6,7 +6,7 @@ import os
 import errno
 
 def main(filename):
-	students = make_list_of_dicts_from(filename) 
+	students = make_list_of_dicts_from(filename)
 	hs, ms, names = make_dicts(students)
 	write_reports(hs, 'current', names)
 	write_reports(ms, 'previous', names)
@@ -23,7 +23,7 @@ def make_dicts(students):
 			(2) dict of dicts of middle schools with high schools counts
 			(3) a dictionary {school_code: school_name}
 	'''
-	hs = {} # dict of dicts {high_school_id: {middle_school_id: count}} 
+	hs = {} # dict of dicts {high_school_id: {middle_school_id: count}}
 	ms = {} # dict of dicts {middle_school_id: {high_school_id: count}}
 	directory = {}
 	for student in students:
@@ -40,7 +40,7 @@ def make_dicts(students):
 				hs[high_school_id] = {middle_school_id: 1}
 			if middle_school_id in ms:
 				ms[middle_school_id][high_school_id] = ms[middle_school_id].get(high_school_id, 0) + 1
-			else: 
+			else:
 				ms[middle_school_id] = {high_school_id: 1}
 	return hs, ms, directory
 
@@ -53,7 +53,7 @@ def make_list_of_dicts_from(filename):
 		reader = csv.reader(f, skipinitialspace=True)
 		header = next(reader)
 		a = [dict(zip(header, row)) for row in reader]
-	return a 
+	return a
 
 def mkdir_p(path):
     '''
@@ -91,10 +91,8 @@ def make_txt_from_csv(csv_file, txt_file):
 		print("I/O error({0}): {1}".format(e.errno, e.strerror))
 
 	if not my_output_file.closed:
-		my_output_file.write("#1\n")
-		my_output_file.write("double({},{})\n".format(len(text_list), 2))
 		for line in text_list:
-			my_output_file.write("  " + line)
+			my_output_file.write(line)
 		#print('File Successfully written.')
 		my_output_file.close()
 
