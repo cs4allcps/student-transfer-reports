@@ -67,6 +67,37 @@ def mkdir_p(path):
         else:
             raise
 
+def make_txt_from_csv(csv_file, txt_file):
+	'''
+	http://codereview.stackexchange.com/questions/81990/manipulating-csv-files-to-regular-text-file
+	'''
+	# A simple program to create a formatted text file from a *.csv file.
+
+	try:
+		my_input_file = open(csv_file, "r")
+	except IOError as e:
+		print("I/O error({0}): {1}".format(e.errno, e.strerror))
+
+	if not my_input_file.closed:
+		text_list = [];
+		for line in my_input_file.readlines():
+			line = line.split(",", 2)
+			text_list.append(" ".join(line))
+		my_input_file.close()
+
+	try:
+		my_output_file = open(txt_file, "w")
+	except IOError as e:
+		print("I/O error({0}): {1}".format(e.errno, e.strerror))
+
+	if not my_output_file.closed:
+		my_output_file.write("#1\n")
+		my_output_file.write("double({},{})\n".format(len(text_list), 2))
+		for line in text_list:
+			my_output_file.write("  " + line)
+		#print('File Successfully written.')
+		my_output_file.close()
+
 def write_reports(schools, report_type, names):
 	'''
 	Writes a csv report for each school with
@@ -74,6 +105,7 @@ def write_reports(schools, report_type, names):
 		(2) For previous schools: a list of schools students matriculated to wiht counts
 	'''
 	mkdir_p('reports/' + report_type + '/csv_reports')
+	mkdir_p('reports/' + report_type + '/txt_reports')
 	for index in schools:
 		school = schools[index]
 		name = names[index]
@@ -88,6 +120,7 @@ def write_reports(schools, report_type, names):
 			w.writerow(['School Code', 'School Name', 'Count'])
 			for key in school:
 				w.writerow([key, names[key], school[key]])
+		make_txt_from_csv('reports/' + report_type + '/csv_reports/' + name + '.csv', 'reports/' + report_type + '/txt_reports/' + name + '.txt')
 
 
 if __name__ == '__main__':
