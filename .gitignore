@@ -1,1 +1,6 @@
+# vim junk
+*.swp
+*.swo
+# inputs, outputs
 *.csv
+reports/
