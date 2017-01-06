@@ -2,17 +2,18 @@
 
 import networkx as nx
 import matplotlib.pyplot as plt
+import csv
 
-def generate_graph(filename):
+def generate_graph(filepath):
 	'''
 	Takes a .csv file as outputted from student-transfer-reports.py 
 	and outputs a graph object representing the data therein.
 	'''
-	schoolName = filename.split('/')[-1][:-4]
+	schoolName = filepath.split('/')[-1][:-4]
 	g = nx.Graph()
 	g.add_node('schoolName')
-	with open(filename) as f:
-		reader = csv.reader(f, skipInitialspace = True)
+	with open(filepath) as f:
+		reader = csv.reader(f, skipinitialspace=True)
 		header = next(reader)
 		for row in reader:
 			school = dict(zip(header, row))
@@ -20,21 +21,21 @@ def generate_graph(filename):
 			g.add_edge(schoolName, school['School Name'], weight = school['Count'])
 	return g
 
-def draw_graph(filename):
+def draw_graph(filepath):
 	'''
 	Takes a .csv file as outputted from student-transfer-reports.py 
 	and displays a graph representing the data therein.
 	'''
-	g = generate_graph(filename)
+	g = generate_graph(filepath)
 	nx.draw(g)
 	plt.show()
 
-def save_graph(input_filename, output_filename):
+def save_graph(input_filepath, output_filepath):
 	'''
 	Takes a .csv file as outputted from student-transfer-reports.py and
 	saves a .png file containing a graph representing the data therein.
 	'''
-	g = generate_graph(input_filename)
+	g = generate_graph(input_filepath)
 	nx.draw(g)
-	plt.save(output_filename)
+	plt.save(output_filepath)
 
