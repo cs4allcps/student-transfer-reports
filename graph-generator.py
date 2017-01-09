@@ -18,7 +18,7 @@ def generate_graph(filepath):
 		for row in reader:
 			school = dict(zip(header, row))
 			g.add_node(school['School Name'], code = school['School Code'])
-			g.add_edge(schoolName, school['School Name'], weight = school['Count'])
+			g.add_edge(schoolName, school['School Name'], weight = float(school['Count']))
 	return g
 
 def draw_graph(filepath):
@@ -27,7 +27,9 @@ def draw_graph(filepath):
 	and displays a graph representing the data therein.
 	'''
 	g = generate_graph(filepath)
-	nx.draw(g)
+	edges = g.edges()
+	weights = [g[u][v]['weight'] for u,v in edges]
+	nx.draw_networkx(g, edges = edges, width = weights, node_shape = [(-150, -10), (150, -10), (150, 10), (-150, 10)], node_size = 20000, font_size = 7)
 	plt.show()
 
 def save_graph(input_filepath, output_filepath):
@@ -35,7 +37,6 @@ def save_graph(input_filepath, output_filepath):
 	Takes a .csv file as outputted from student-transfer-reports.py and
 	saves a .png file containing a graph representing the data therein.
 	'''
-	g = generate_graph(input_filepath)
-	nx.draw(g)
+	draw_graph(input_filepath)
 	plt.save(output_filepath)
 
