@@ -36,6 +36,6 @@ def load_from_file(filename):
 			count = school['Count']
 			weight = t.weight + int(count)
 			t.weight = weight
-			label = "%s (%s)" % (name, weight)
+			label = "%s (%s)" % (name, int(count))
 			children[name] = tree.TreeNode('', label, int(count))
 	return t

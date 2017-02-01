@@ -116,7 +116,7 @@ def write_reports(schools, report_type, names):
 		with open('reports/' + report_type + '/csv_reports/' + name + '.csv', 'w') as f:
 			w = csv.writer(f)
 			w.writerow(['School Code', 'School Name', 'Count'])
-			for key in school:
+			for key in sorted(school, key=school.__getitem__):
 				w.writerow([key, names[key], school[key]])
 		make_txt_from_csv('reports/' + report_type + '/csv_reports/' + name + '.csv', 'reports/' + report_type + '/txt_reports/' + name + '.txt')
 
