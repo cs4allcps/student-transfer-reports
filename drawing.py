@@ -172,6 +172,9 @@ class ChiCanvas:
         '''
         Automatically put ellipsis after overflowing text
         '''
+        #this method was causing a rendering issue in some virtual environments,
+        # so I commented out its contents as a quick fix.
+        '''
         if event is not None:
             fig = event.canvas.figure
             renderer = event.renderer
@@ -186,6 +189,7 @@ class ChiCanvas:
             fig.canvas.callbacks.callbacks[event.name] = {}
             fig.canvas.draw()
             fig.canvas.callbacks.callbacks[event.name] = func_handles
+        '''
 
 
 class ColorKey:

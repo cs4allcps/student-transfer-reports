@@ -10,7 +10,7 @@ from drawing import ChiCanvas, ColorKey
 MIN_RECT_SIDE=0.01
 MIN_RECT_SIDE_FOR_TEXT=0.03
 X_SCALE_FACTOR=12
-Y_SCALE_FACTOR=10
+Y_SCALE_FACTOR=6
 
 
 def draw_treemap(t, 
