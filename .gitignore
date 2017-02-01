@@ -2,5 +2,7 @@
 *.swp
 *.swo
 # inputs, outputs
+*.png
 *.csv
 reports/
+__pycache__/
