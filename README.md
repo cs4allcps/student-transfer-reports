@@ -69,6 +69,11 @@ For treemaps that graphically illustrate student flow for a given school:
 
 							output_filename = 'your_desired_filename_here.png'
 
+						You can also specify a filepath to save the image in a folder
+						other than the current directory as long as the filepath already
+						exists; functionality to create new filepaths is not currently 
+						included in the code, so trying to do so will generate an error.
+
 					(ii) Run the following command
 
 							draw(filepath, output_filename)
@@ -103,6 +108,11 @@ drawing matriculate to/from (lines are proportional in width to the number of st
 						and save that filename to a variable output_filename
 
 							output_filename = 'your_desired_filename_here.png'
+
+						You can also specify a filepath to save the image in a folder
+						other than the current directory as long as the filepath already
+						exists; functionality to create new filepaths is not currently 
+						included in the code, so trying to do so will generate an error.
 
 					(ii) Run the following command
 
