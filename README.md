@@ -8,11 +8,11 @@ For reports on where 9th graders matriculated from for each high school and repo
 	(1) Make sure Inbound9thGradeStudentCourseRecommendations.csv is located in the same
 		folder as is student-transfer-reports.py
 
-	(2) Navigate to that file in shell and enter
+	(2) Navigate to that folder in shell and enter
 
 			python3 student-transfer-reports.py
 
-	(3) A file called 'reports' will be created. In /reports there should be the following files
+	(3) A file called 'reports' will be created. In /reports you should find the following files
 
 			(a) /current, which contains
 					(i) /csv_reports
