@@ -3,8 +3,7 @@ Creates reports on where 9th graders went to school the year before.
 
 ##Products##
 
-For reports on where 9th graders came from for each high school or on where 9th graders 
-went from each middle school:
+For reports on where 9th graders matriculated from for each high school and reports on where 9th graders matriculated to for each previous school:
 
 	(1) Make sure Inbound9thGradeStudentCourseRecommendations.csv is located in the same
 		folder as is student-transfer-reports.py
