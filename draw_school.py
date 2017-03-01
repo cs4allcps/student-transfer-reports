@@ -5,6 +5,9 @@ import sys
 import csv
 import tree
 import treemap
+import pandas as pd 
+
+CS4ALL_SCHOOLS_FILE = 'cs4all-schools.csv'
 
 def draw(filename, output_filename = None):
 	'''
@@ -25,17 +28,39 @@ def load_from_file(filename):
 	Returns: a TreeNode object
 
 	'''
-	t = tree.TreeNode('', '', 0)
-	children = t.get_children_as_dict()
+	cs4all_schools = pd.read_csv(CS4ALL_SCHOOLS_FILE)
+	cs4all_school_ids = cs4all_schools['school_id'].tolist()
+	cs4all = tree.TreeNode('1', 'cs4all Schools', 0)
+	other = tree.TreeNode('0', 'Other Schools', 0)
+	cs4all_child = cs4all.get_children_as_dict()
+	other_child = not_cs4all.get_children_as_dict()
 	with open(filename) as f:
 		reader = csv.reader(f, skipinitialspace=True)
 		header = next(reader)
 		for row in reader:
 			school = dict(zip(header, row))
-			name = school['School Name']
-			count = school['Count']
-			weight = t.weight + int(count)
-			t.weight = weight
-			label = "%s (%s)" % (name, int(count))
-			children[name] = tree.TreeNode('', label, int(count))
+			if school['School Code'] in cs4all_school_ids:
+				name = school['School Name']
+				count = school['Count']
+				weight = cs4all.weight + int(count)
+				cs4all.weight = weight
+				label = "%s (%s)" % (name, int(count))
+				cs4all_child[name] = tree.TreeNode('1', label, int(count))
+			else:
+				name = school['School Name']
+				count = school['Count']
+				weight = other.weight + int(count)
+				other.weight = weight
+				label = "%s (%s)" % (name, int(count))
+				other_child[name] = tree.TreeNode('0', label, int(count))
+	t = tree.TreeNode('', 'Schools', cs4all.weight + other.weight)
+	t.get_children_as_dict['cs4all Schools'] = cs4all
+	t.get_children_as_dict['Other Schools'] = other
 	return t
+
+
+
+
+
+
+
