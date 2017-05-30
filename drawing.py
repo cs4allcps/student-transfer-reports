@@ -56,7 +56,7 @@ class ChiCanvas:
         '''
         # -w/2.0 + 0.02
         self._draw_text_with_rotation(x0, y0, w, 0.03, txt,
-                                      offset_x=-w/2.0+0.075, fg=fg, rotation=0,
+                                      offset_x=-w/2.0+0.01, fg=fg, rotation=0,
                                       debug=debug)
         
 
@@ -65,6 +65,7 @@ class ChiCanvas:
         draw text txt vertically at specified (x0, y0) coordinates
         max height h, color fg
         '''
+        print(txt)
         self._draw_text_with_rotation(x0, y0, 0.03, h, txt, offset_y=h/2.0-0.02,
                                       fg=fg, rotation=90, debug=debug)
 
@@ -174,7 +175,7 @@ class ChiCanvas:
         '''
         #this method was causing a rendering issue in some virtual environments,
         # so I commented out its contents as a quick fix.
-        '''
+        
         if event is not None:
             fig = event.canvas.figure
             renderer = event.renderer
@@ -189,7 +190,7 @@ class ChiCanvas:
             fig.canvas.callbacks.callbacks[event.name] = {}
             fig.canvas.draw()
             fig.canvas.callbacks.callbacks[event.name] = func_handles
-        '''
+        
 
 
 class ColorKey:

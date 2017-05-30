@@ -10,7 +10,7 @@ from drawing import ChiCanvas, ColorKey
 MIN_RECT_SIDE=0.01
 MIN_RECT_SIDE_FOR_TEXT=0.03
 X_SCALE_FACTOR=12
-Y_SCALE_FACTOR=6
+Y_SCALE_FACTOR=8
 
 
 def draw_treemap(t, 
@@ -32,7 +32,6 @@ def draw_treemap(t,
         storing a the image or None, if the image should be shown.
     '''
 
-    ### START: DO NOT CHANGE THIS CODE ###
     c = ChiCanvas(X_SCALE_FACTOR, Y_SCALE_FACTOR)
 
     # define coordinates for the initial rectangle for the treemap
@@ -41,10 +40,8 @@ def draw_treemap(t,
     height_init_rect = bounding_rec_height
     width_init_rect = bounding_rec_width
 
-    ### END: DO NOT CHANGE THIS CODE ###
 
 
-    ### YOUR CODE HERE ###
     calc_weight(t)
     rects = make_rects(t, x_origin_init_rect, y_origin_init_rect, width_init_rect, height_init_rect, 1)
     #draw rectangles
@@ -60,19 +57,17 @@ def draw_treemap(t,
         width = rect['width']
         height = rect['height']
         c.draw_rectangle(x, y, x + width, y + height, color)
-        if (width >= height) and (height >= MIN_RECT_SIDE_FOR_TEXT):
+        if (height >= MIN_RECT_SIDE_FOR_TEXT): #and (width >= height):
             c.draw_text(x + width/2, y + height/2, width, rect['label'])
-        elif width >= MIN_RECT_SIDE_FOR_TEXT:
-            c.draw_text_vertical(x + width/2, y + height/2, height, rect['label'])
+        #elif width >= MIN_RECT_SIDE_FOR_TEXT:
+        #    c.draw_text_vertical(x + width/2, y + height/2, height, rect['label'])
 
-    ### START: DO NOT CHANGE THIS CODE ###
     # save or show the result.
     if output_filename:
         print("saving...", output_filename)
         c.savefig(output_filename)
     else:
         c.show()
-    ### END: DO NOT CHANGE THIS CODE ###
 
 
 def calc_weight(t):

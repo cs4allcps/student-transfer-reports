@@ -1,4 +1,4 @@
-#incoding: utf-8
+#encoding: utf-8
 
 import networkx as nx
 import matplotlib.pyplot as plt

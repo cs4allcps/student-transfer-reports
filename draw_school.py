@@ -33,13 +33,13 @@ def load_from_file(filename):
 	cs4all = tree.TreeNode('1', 'cs4all Schools', 0)
 	other = tree.TreeNode('0', 'Other Schools', 0)
 	cs4all_child = cs4all.get_children_as_dict()
-	other_child = not_cs4all.get_children_as_dict()
+	other_child = other.get_children_as_dict()
 	with open(filename) as f:
 		reader = csv.reader(f, skipinitialspace=True)
 		header = next(reader)
 		for row in reader:
 			school = dict(zip(header, row))
-			if school['School Code'] in cs4all_school_ids:
+			if school['School Code'] in [str(int(x)) for x in cs4all_school_ids]:
 				name = school['School Name']
 				count = school['Count']
 				weight = cs4all.weight + int(count)
@@ -53,9 +53,10 @@ def load_from_file(filename):
 				other.weight = weight
 				label = "%s (%s)" % (name, int(count))
 				other_child[name] = tree.TreeNode('0', label, int(count))
-	t = tree.TreeNode('', 'Schools', cs4all.weight + other.weight)
-	t.get_children_as_dict['cs4all Schools'] = cs4all
-	t.get_children_as_dict['Other Schools'] = other
+	t = tree.TreeNode('', '', cs4all.weight + other.weight)
+	children = t.get_children_as_dict()
+	children['cs4all'] = cs4all
+	children['other'] = other
 	return t
 
 
